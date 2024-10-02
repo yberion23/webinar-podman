@@ -23,7 +23,9 @@ make network workable on user
 add ssh keys 
 
 
-mkdir 
+mkdir /data
+      /data/mysql
+      /letsencrypt
 
 
 
