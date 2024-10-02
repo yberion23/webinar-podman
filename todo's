@@ -1,17 +1,34 @@
 TODO
 
+
+
 Install: 
 git 
 podman
 podman-compose
 mc
+vim
  
 
 Do's
 ssh config
 port 22022
 
-create user
+create user rustdesk
+
+make network workable on user
+---- setcap 'cap_net_bind_service=+ep' /usr/bin/podman -----
+
 
 add ssh keys 
 
+
+
+
+Modifying the range of unprivileged port
+The last strategy we will examine here consists in changing the range of privileged ports. To check what ports are considered privileged by the system, it is enough to read the /proc/sys/net/ipv4/ip_unprivileged_port_start file: it contains the first unprivileged port in the system (default is 1024). Sticking to the previous example, to make the system consider port 80 as unprivileged, we would write the appropriate value to the file:
+
+$ echo 80 | sudo tee /proc/sys/net/ipv4/ip_unprivileged_port_start
+To make this change persistent, we need to add the following line to a configuration file in the /etc/sysctl.d/ directory:
+$ echo net.ipv4.ip_unprivileged_port_start = 80 | sudo tee /etc/sysctl.d/90-unprivileged_port_start.conf
+Notice that by adopting this strategy, the system will consider all ports >= 80 as unprivileged!
