@@ -9,6 +9,10 @@ podman-compose
 mc
 vim
 rootlesskit
+
+
+
+loginctl enable-linger 1000
  
 
 Do's
